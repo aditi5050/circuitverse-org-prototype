@@ -1,27 +1,31 @@
-# CircuitVerse Organization System Prototype
+# 🚀 CircuitVerse Organization System (GSoC Prototype)
 
-## 🚀 Overview
+## 🧠 Overview
 
-This project is a prototype implementation of **Enterprise & Institutional Organization Features** for CircuitVerse (GSoC).
+This project is a prototype implementation of **Enterprise & Institutional Organization Features** for CircuitVerse.
 
-It introduces a scalable multi-tenant architecture that allows institutions (like universities) to manage users, groups, and classrooms under a unified system with role-based access control and custom branding.
+It introduces a **multi-tenant architecture** that enables universities and institutions to manage users, groups, and classrooms under a unified system with **role-based access control (RBAC)** and **custom branding via subdomains**.
 
 ---
 
-## 🧠 Features Implemented
+## ✨ Key Features
 
 ### 🏢 Hierarchical Organization Structure
 
-* Organization → Groups → Classrooms
-* Models real-world academic hierarchy (University → Department → Course)
+```
+Organization → Groups → Classrooms
+```
+
+* Models real-world academic systems
+* Enables scalable management across institutions
 
 ---
 
 ### 👥 Multi-Tenancy
 
 * Users belong to organizations via memberships
-* A user can have different roles in different organizations
-* Data is isolated per organization
+* A user can be part of multiple organizations
+* Data is logically isolated per organization
 
 ---
 
@@ -34,48 +38,86 @@ Roles implemented:
 * `instructor`
 * `student`
 
-Permissions enforced via policy layer:
+🔐 Permissions enforced using a policy-based system:
 
-* Admin / Group Lead / Instructor → allowed to manage classrooms
+* Admin / Group Lead / Instructor → allowed to manage resources
 * Student → restricted
+
+---
+
+### 🌐 Subdomain-Based Organization Context
+
+* Each organization is mapped to a subdomain
+* Example:
+
+  * `lvh.me:3000` → No organization
+  * `iitd.lvh.me:3000` → IIT Delhi
+
+👉 Enables **true SaaS-like behavior**
 
 ---
 
 ### 🎨 Custom Branding
 
-* Organization-specific subdomains (e.g., `iitd.lvh.me`)
-* Dynamic organization name and logo rendering
+* Organization-specific:
+
+  * Name
+  * Logo
+* Dynamically rendered based on subdomain
 
 ---
 
 ### 🔐 Authentication
 
-* User authentication implemented using Devise
+* Implemented using **Devise**
+* Foundation ready for **OIDC / SSO integration**
 
 ---
 
 ## ⚙️ Tech Stack
 
-* Ruby on Rails
-* PostgreSQL
-* Devise (Authentication)
-* Policy-based Authorization (Pundit-style)
+* **Ruby on Rails**
+* **PostgreSQL**
+* **Devise** (Authentication)
+* **Pundit-style Policies** (Authorization)
+* **OmniAuth (planned)** for OIDC/SSO
 
 ---
 
-## 🧪 Demo Flow
+## 🏗️ System Architecture
 
-1. Create an organization (e.g., IIT Delhi)
-2. Assign subdomain and logo
-3. Add users with different roles
-4. Create groups and classrooms
-5. Enforce RBAC:
+### Core Models
+
+* `User`
+* `Organization`
+* `Membership` (joins users ↔ organizations with roles)
+* `Group`
+* `Classroom`
+
+### Relationships
+
+* User ↔ Organization → Many-to-Many (via Membership)
+* Organization → Groups → Classrooms
+
+---
+
+## 🧪 Demo
+
+### ▶️ Access URLs
+
+```
+http://lvh.me:3000
+http://iitd.lvh.me:3000
+```
+
+### 🔍 Demo Flow
+
+1. Open root → no org detected
+2. Open subdomain → organization loaded
+3. RBAC:
 
    * Admin → allowed
-   * Student → denied
-6. Access via subdomain:
-
-   * `iitd.lvh.me:3000`
+   * Student → restricted
 
 ---
 
@@ -89,23 +131,54 @@ bundle install
 rails db:create
 rails db:migrate
 
-rails server
+bin/rails server
 ```
 
 Then open:
 
-```text
+```
 http://lvh.me:3000
 ```
 
 ---
 
-## 💡 Future Work
+## 🔮 Future Enhancements
 
-* SSO integration using OpenID Connect (Google / Azure AD)
-* Invitation system for onboarding users
-* Admin dashboard for organization management
-* Custom domain support
+### 🔐 OpenID Connect (OIDC) / SSO
+
+* Integration with:
+
+  * Google Workspace
+  * Azure AD
+* Map users to organizations via email domain
+
+---
+
+### 📩 Invitation System
+
+* Org admins invite users
+* Role assigned during onboarding
+
+---
+
+### 📊 Admin Dashboard
+
+* Manage:
+
+  * Users
+  * Roles
+  * Groups
+  * Classrooms
+
+---
+
+### 🌍 Custom Domains
+
+* Support:
+
+  ```
+  university.edu → CircuitVerse org
+  ```
 
 ---
 
@@ -113,13 +186,20 @@ http://lvh.me:3000
 
 This prototype demonstrates:
 
-* Multi-tenant system design
-* Hierarchical data modeling
-* Policy-based RBAC implementation
-* Foundation for enterprise-level features in CircuitVerse
+* ✅ Multi-tenant system design
+* ✅ Hierarchical data modeling
+* ✅ Policy-based RBAC
+* ✅ Subdomain routing & branding
+* 🔄 Foundation for OIDC-based SSO
 
 ---
 
-## 📌 Author
+## 👩‍💻 Author
 
-Aditi
+**Aditi**
+
+---
+
+## ⭐ Acknowledgment
+
+Built as part of preparation for contributing to CircuitVerse under Google Summer of Code.
