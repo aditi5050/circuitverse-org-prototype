@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # circuitverse-org-prototype
 =======
 # README
@@ -105,4 +104,3 @@ It introduces a scalable multi-tenant architecture allowing institutions to mana
 ## 📌 Author
 
 Aditi
->>>>>>> 1e4ef15e289f6f182fe051153f4d6fb7fa3915d0
