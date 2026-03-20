@@ -1,0 +1,8 @@
+<h1>Welcome to CircuitVerse Org System</h1>
+
+<% if @current_org %>
+  <h2><%= @current_org.name %></h2>
+  <img src="<%= @current_org.logo_url %>" width="100" />
+<% else %>
+  <p>No organization detected</p>
+<% end %>

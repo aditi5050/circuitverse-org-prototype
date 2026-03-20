@@ -4,7 +4,9 @@ class ClassroomPolicy < ApplicationPolicy
       organization: record.group.organization
     )
 
-    membership&.org_admin? || membership&.instructor?
+    membership&.org_admin? ||
+    membership&.group_lead? ||
+    membership&.instructor?
   end
 
   def update?
