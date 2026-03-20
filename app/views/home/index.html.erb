@@ -1,8 +1,10 @@
-<h1>Welcome to CircuitVerse Org System</h1>
-
-<% if @current_org %>
-  <h2><%= @current_org.name %></h2>
-  <img src="<%= @current_org.logo_url %>" width="100" />
+<% if current_org.present? %>
+  <h1>Welcome <%= current_org.name %></h1>
 <% else %>
-  <p>No organization detected</p>
+  <h1>Welcome to CircuitVerse Org System</h1>
 <% end %>
+
+<%= button_to "Sign in with Google",
+    user_google_oauth2_omniauth_authorize_path,
+    method: :post,
+    form: { data: { turbo: false } } %>

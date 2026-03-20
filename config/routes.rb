@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   get "home/index"
-
+  resources :classrooms, only: [:create]
+  
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-
+  
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "home#index"

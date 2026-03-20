@@ -72,6 +72,11 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
-config.hosts.clear
 
+  # Allow lvh.me and any subdomain of it (Rails 6+ Host Authorization for multi-tenant dev)
+  config.hosts << "lvh.me"
+  config.hosts << /.*\.lvh\.me/
+
+  # Be explicit about TLD length to avoid subdomain parsing surprises
+  config.action_dispatch.tld_length = 1
 end
