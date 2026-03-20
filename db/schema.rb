@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[8.1].define(version: 2026_03_20_034520) do
+=======
+ActiveRecord::Schema[8.1].define(version: 2026_03_20_021751) do
+>>>>>>> 1e4ef15e289f6f182fe051153f4d6fb7fa3915d0
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,7 +46,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_20_034520) do
 
   create_table "organizations", force: :cascade do |t|
     t.datetime "created_at", null: false
+<<<<<<< HEAD
     t.string "logo_url"
+=======
+>>>>>>> 1e4ef15e289f6f182fe051153f4d6fb7fa3915d0
     t.string "name"
     t.string "subdomain"
     t.datetime "updated_at", null: false
