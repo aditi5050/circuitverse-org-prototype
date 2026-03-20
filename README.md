@@ -1,62 +1,56 @@
-
-# circuitverse-org-prototype
-=======
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
->>>>>>> 0a7c5ba (Initial commit: Org system prototype with RBAC)
-=======
 # CircuitVerse Organization System Prototype
 
 ## 🚀 Overview
 
-This project is a prototype implementation of enterprise-level organizational features for CircuitVerse, designed for GSoC.
+This project is a prototype implementation of **Enterprise & Institutional Organization Features** for CircuitVerse (GSoC).
 
-It introduces a scalable multi-tenant architecture allowing institutions to manage users, groups, and classrooms with role-based access control.
+It introduces a scalable multi-tenant architecture that allows institutions (like universities) to manage users, groups, and classrooms under a unified system with role-based access control and custom branding.
 
 ---
 
 ## 🧠 Features Implemented
 
-### 🏢 Organization Hierarchy
+### 🏢 Hierarchical Organization Structure
 
 * Organization → Groups → Classrooms
-* Supports institutional structure (e.g., University → Department → Course)
+* Models real-world academic hierarchy (University → Department → Course)
+
+---
 
 ### 👥 Multi-Tenancy
 
 * Users belong to organizations via memberships
+* A user can have different roles in different organizations
 * Data is isolated per organization
+
+---
 
 ### 🛡️ Role-Based Access Control (RBAC)
 
-* Roles: `org_admin`, `instructor`, `student`
-* Only authorized roles can create/manage classrooms
+Roles implemented:
+
+* `org_admin`
+* `group_lead`
+* `instructor`
+* `student`
+
+Permissions enforced via policy layer:
+
+* Admin / Group Lead / Instructor → allowed to manage classrooms
+* Student → restricted
+
+---
+
+### 🎨 Custom Branding
+
+* Organization-specific subdomains (e.g., `iitd.lvh.me`)
+* Dynamic organization name and logo rendering
+
+---
 
 ### 🔐 Authentication
 
-* Implemented using Devise
+* User authentication implemented using Devise
 
 ---
 
@@ -65,39 +59,64 @@ It introduces a scalable multi-tenant architecture allowing institutions to mana
 * Ruby on Rails
 * PostgreSQL
 * Devise (Authentication)
-* Pundit-style policy (RBAC)
+* Policy-based Authorization (Pundit-style)
 
 ---
 
-## 🧪 Demo
+## 🧪 Demo Flow
 
-### Example Flow:
-
-1. Create organization (e.g., IIT Delhi)
-2. Add users with roles
-3. Create group (CSE Department)
-4. Create classroom (Digital Logic)
-5. RBAC:
+1. Create an organization (e.g., IIT Delhi)
+2. Assign subdomain and logo
+3. Add users with different roles
+4. Create groups and classrooms
+5. Enforce RBAC:
 
    * Admin → allowed
    * Student → denied
+6. Access via subdomain:
+
+   * `iitd.lvh.me:3000`
 
 ---
 
-## 💡 Key Learnings
+## 🏗️ Setup Instructions
 
-* Multi-tenant architecture design
-* Policy-based authorization
-* Scalable database modeling
+```bash
+git clone https://github.com/aditi5050/circuitverse-org-prototype.git
+cd circuitverse-org-prototype
+
+bundle install
+rails db:create
+rails db:migrate
+
+rails server
+```
+
+Then open:
+
+```text
+http://lvh.me:3000
+```
 
 ---
 
-## 🎯 Future Work
+## 💡 Future Work
 
-* SSO integration (OIDC)
-* Invitation system
-* Admin dashboard
-* Custom branding
+* SSO integration using OpenID Connect (Google / Azure AD)
+* Invitation system for onboarding users
+* Admin dashboard for organization management
+* Custom domain support
+
+---
+
+## 🎯 GSoC Relevance
+
+This prototype demonstrates:
+
+* Multi-tenant system design
+* Hierarchical data modeling
+* Policy-based RBAC implementation
+* Foundation for enterprise-level features in CircuitVerse
 
 ---
 
